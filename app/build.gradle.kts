@@ -21,7 +21,7 @@ android {
             useSupportLibrary = true
         }
     }
-//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
+//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
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -61,6 +61,7 @@ dependencies {
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
+    implementation("com.google.firebase:firebase-auth:22.2.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -77,5 +78,8 @@ dependencies {
     implementation ("androidx.lifecycle:lifecycle-runtime-compose:2.6.2")
     implementation ("androidx.navigation:navigation-compose:2.7.5")
     implementation ("io.coil-kt:coil-compose:2.4.0")
+
+    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
+    implementation ("androidx.compose.runtime:runtime-livedata:1.5.4")
 
 }
