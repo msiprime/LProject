@@ -10,12 +10,9 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -23,6 +20,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.google.android.gms.auth.api.identity.Identity
+import com.msicoding.lproject.presention.profile.ProfileScreen
 import com.msicoding.lproject.presention.sign_in.GoogleAuthUiClient
 import com.msicoding.lproject.presention.sign_in.SignInScreen
 import com.msicoding.lproject.presention.sign_in.SignInViewModel
@@ -54,7 +52,14 @@ class MainActivity : ComponentActivity() {
                         composable("sign_in") {
                             val viewModel = viewModel<SignInViewModel>()
                             val state by viewModel.state.collectAsStateWithLifecycle()
-                            val luncher = rememberLauncherForActivityResult(
+
+                            LaunchedEffect(key1 = Unit) {
+                                if (googleAuthUiClient.getSignedInUser() != null){
+                                    navController.navigate("profile")
+                                }
+                            }
+
+                            val launcher = rememberLauncherForActivityResult(
                                 contract = ActivityResultContracts.StartIntentSenderForResult(),
                                 onResult = { result ->
                                     if (result.resultCode == RESULT_OK) {
@@ -75,6 +80,9 @@ class MainActivity : ComponentActivity() {
                                         "Sign in Successful",
                                         Toast.LENGTH_LONG
                                     ).show()
+
+                                    navController.navigate("profile")
+                                    viewModel.resetState()
                                 }
                             }
 
@@ -83,7 +91,7 @@ class MainActivity : ComponentActivity() {
                                 onSignInClick = {
                                     lifecycleScope.launch {
                                         val signInIntentSender = googleAuthUiClient.signIn()
-                                        luncher.launch(
+                                        launcher.launch(
                                             IntentSenderRequest.Builder(
                                                 signInIntentSender ?: return@launch
                                             ).build()
@@ -93,25 +101,32 @@ class MainActivity : ComponentActivity() {
                             )
 
                         }
+                        composable(
+                            route = "profile"
+                        ) {
+                            ProfileScreen(
+                                userData = googleAuthUiClient.getSignedInUser(),
+                                onSignOut = {
+                                    lifecycleScope.launch {
+                                        googleAuthUiClient.signOut()
+                                        Toast.makeText(
+                                            applicationContext,
+                                            "Signed Out",
+                                            Toast.LENGTH_LONG
+                                        ).show()
+
+                                        navController.popBackStack()
+                                    }
+                                }
+                            )
+                        }
+
                     }
                 }
             }
         }
     }
 }
-//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
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    LProjectTheme {
-        Greeting("Android")
-    }
-}
+//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
+

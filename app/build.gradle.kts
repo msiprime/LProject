@@ -22,6 +22,7 @@ android {
         }
     }
 //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
+
     buildTypes {
         release {
             isMinifyEnabled = false
