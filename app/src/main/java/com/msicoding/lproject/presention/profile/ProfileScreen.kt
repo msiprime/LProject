@@ -1,6 +1,5 @@
 package com.msicoding.lproject.presention.profile
 
-import WeatherScreen
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -85,7 +84,6 @@ fun ProfileScreen(
                 }
             }
         )
-
         weatherInformation?.let {
             Text("Weather: ${it.main.temp} °C in ${it.name}")
         }
