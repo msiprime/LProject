@@ -87,7 +87,6 @@ fun ProfileScreen(
         )
 
         weatherInformation?.let {
-            // Display the weather information
             Text("Weather: ${it.main.temp} °C in ${it.name}")
         }
     }
