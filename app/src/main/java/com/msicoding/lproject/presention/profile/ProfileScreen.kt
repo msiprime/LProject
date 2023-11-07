@@ -1,10 +1,11 @@
 package com.msicoding.lproject.presention.profile
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
@@ -36,36 +37,69 @@ fun ProfileScreen(
     userData: UserData?,
     onSignOut: () -> Unit
 ) {
-    val coroutineScope = rememberCoroutineScope()
-    var weatherInformation by remember { mutableStateOf<WeatherResponse?>(null) }
-    var location by remember { mutableStateOf("") }
     Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        if (userData?.profilePictureUrl != null) {
-            AsyncImage(
-                model = userData.profilePictureUrl, contentDescription = "Profile picture",
+        userData?.profilePictureUrl?.let { profilePictureUrl ->
+            Box(
                 modifier = Modifier
                     .size(150.dp)
-                    .clip(CircleShape),
-                contentScale = ContentScale.Crop
-            )
-            Spacer(modifier = Modifier.height(16.dp))
+                    .clip(CircleShape)
+            ) {
+                AsyncImage(
+                    model = profilePictureUrl,
+                    contentDescription = "Profile picture",
+                    modifier = Modifier.fillMaxSize(),
+                    contentScale = ContentScale.Crop
+                )
+            }
         }
-        if (userData?.userName != null) {
+
+        userData?.userName?.let { userName ->
             Text(
-                text = userData.userName,
+                text = userName,
                 textAlign = TextAlign.Center,
                 fontSize = 36.sp,
                 fontWeight = FontWeight.SemiBold
             )
-            Spacer(modifier = Modifier.height(16.dp))
         }
-        Button(onClick = onSignOut) {
-            Text(text = "Sign Out")
-        }
+
+        WeatherSection(
+            onSignOut = onSignOut
+        )
+    }
+}
+
+@Composable
+fun WeatherSection(
+    onSignOut: () -> Unit
+) {
+
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        WeatherScreen(onSignOut = onSignOut)
+    }
+}
+
+@Composable
+fun WeatherScreen(
+    onSignOut: () -> Unit
+) {
+    val coroutineScope = rememberCoroutineScope()
+    var weatherInformation by remember { mutableStateOf<WeatherResponse?>(null) }
+    var location by remember { mutableStateOf("") }
+
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
         WeatherScreen(
             onLocationEntered = { enteredLocation ->
                 location = enteredLocation
@@ -84,10 +118,15 @@ fun ProfileScreen(
                 }
             }
         )
+
         weatherInformation?.let {
             Text("Weather: ${it.main.temp} °C in ${it.name}")
+        }
+
+        Button(onClick = onSignOut) {
+            Text("Sign Out")
         }
     }
 }
 
-//check
+
