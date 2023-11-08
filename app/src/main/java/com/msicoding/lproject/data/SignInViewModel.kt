@@ -1,6 +1,8 @@
-package com.msicoding.lproject.presention.sign_in
+package com.msicoding.lproject.data
 
 import androidx.lifecycle.ViewModel
+import com.msicoding.lproject.presention.sign_in.SignInResult
+import com.msicoding.lproject.presention.sign_in.SignInState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update

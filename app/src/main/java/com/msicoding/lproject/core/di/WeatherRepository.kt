@@ -1,28 +1,10 @@
-package com.msicoding.lproject.presention.di
+package com.msicoding.lproject.core.di
 
+import com.msicoding.lproject.data.model.WeatherResponse
+import com.msicoding.lproject.data.remote.WeatherService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.GET
-import retrofit2.http.Query
 
-// Define the data model for the response
-data class WeatherResponse(
-    val main: Main,
-    val name: String
-)
-
-data class Main(
-    val temp: Double
-)
-
-interface WeatherService {
-    @GET("weather")
-    suspend fun getWeather(
-        @Query("q") location: String,
-        @Query("appid") apiKey: String,
-        @Query("units") units: String = "metric"
-    ): WeatherResponse
-}
 
 object WeatherRepository {
     private const val BASE_URL = "https://api.openweathermap.org/data/2.5/"
