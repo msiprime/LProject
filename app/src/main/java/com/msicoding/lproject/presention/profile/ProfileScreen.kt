@@ -25,8 +25,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.msicoding.lproject.presention.di.WeatherRepository
-import com.msicoding.lproject.presention.di.WeatherResponse
+import com.msicoding.lproject.core.di.WeatherRepository
+import com.msicoding.lproject.data.model.WeatherResponse
 import com.msicoding.lproject.presention.sign_in.UserData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

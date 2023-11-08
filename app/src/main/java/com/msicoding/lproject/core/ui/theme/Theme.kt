@@ -1,4 +1,4 @@
-package com.msicoding.lproject.ui.theme
+package com.msicoding.lproject.core.ui.theme
 
 import android.app.Activity
 import android.os.Build

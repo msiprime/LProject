@@ -1,4 +1,4 @@
-package com.msicoding.lproject.ui
+package com.msicoding.lproject
 
 import android.os.Bundle
 import android.widget.Toast
@@ -22,12 +22,13 @@ import androidx.navigation.compose.rememberNavController
 import com.google.android.gms.auth.api.identity.Identity
 import com.msicoding.lproject.presention.profile.ProfileScreen
 import com.msicoding.lproject.presention.sign_in.GoogleAuthUiClient
-import com.msicoding.lproject.presention.sign_in.SignInScreen
-import com.msicoding.lproject.presention.sign_in.SignInViewModel
-import com.msicoding.lproject.ui.theme.LProjectTheme
+import com.msicoding.lproject.presention.profile.SignInScreen
+import com.msicoding.lproject.data.SignInViewModel
+import com.msicoding.lproject.core.ui.theme.LProjectTheme
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
-
+//@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     private val googleAuthUiClient by lazy {
