@@ -21,7 +21,6 @@ object NetworkModule {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
-
     @Provides
     @Singleton
     fun provideWeatherService(retrofit: Retrofit): WeatherService {
