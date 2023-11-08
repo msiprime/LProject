@@ -46,7 +46,7 @@ fun ProfileScreen(
         userData?.profilePictureUrl?.let { profilePictureUrl ->
             Box(
                 modifier = Modifier
-                    .size(150.dp)
+                    .size(100.dp)
                     .clip(CircleShape)
             ) {
                 AsyncImage(
@@ -75,7 +75,8 @@ fun ProfileScreen(
 
 @Composable
 fun WeatherSection(
-    onSignOut: () -> Unit
+    onSignOut: () -> Unit,
+
 ) {
 
     Column(
@@ -99,25 +100,9 @@ fun WeatherScreen(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(16.dp)
-    ) {
-        WeatherScreen(
-            onLocationEntered = { enteredLocation ->
-                location = enteredLocation
-            },
-            onWeatherInfoReceived = { weatherInfo ->
-                coroutineScope.launch {
-                    try {
-                        val result = withContext(Dispatchers.IO) {
-                            WeatherRepository.getWeatherForLocation(weatherInfo)
-                        }
-                        weatherInformation = result
-                        println("Weather information received: Temperature is ${result.main.temp} °C in ${result.name}")
-                    } catch (e: Exception) {
-                        println("Error fetching weather: ${e.message}")
-                    }
-                }
-            }
-        )
+    ){
+
+
 
         weatherInformation?.let {
             Text("Weather: ${it.main.temp} °C in ${it.name}")
@@ -126,6 +111,8 @@ fun WeatherScreen(
         Button(onClick = onSignOut) {
             Text("Sign Out")
         }
+        WeatherScreen(onSignOut)
+
     }
 }
 
