@@ -6,6 +6,6 @@ import javax.inject.Inject
 
 class WeatherRepositoryImpl @Inject constructor(private val service: WeatherService) : WeatherRepository {
     override suspend fun getWeatherForLocation(location: String): WeatherResponse {
-        return service.getWeather(location, "YOUR_OPENWEATHERMAP_API_KEY")
+        return service.getWeather(location, "a8cb9b70848a5e283ad1978833eefa76")
     }
 }

@@ -20,11 +20,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.google.android.gms.auth.api.identity.Identity
+import com.msicoding.lproject.core.di.GetWeatherUseCase
 import com.msicoding.lproject.presention.profile.ProfileScreen
 import com.msicoding.lproject.presention.sign_in.GoogleAuthUiClient
 import com.msicoding.lproject.presention.profile.SignInScreen
 import com.msicoding.lproject.data.SignInViewModel
 import com.msicoding.lproject.core.ui.theme.LProjectTheme
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 //@AndroidEntryPoint
@@ -42,7 +44,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             LProjectTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
