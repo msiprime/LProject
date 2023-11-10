@@ -25,7 +25,6 @@ import com.msicoding.lproject.presention.sign_in.GoogleAuthUiClient
 import com.msicoding.lproject.presention.profile.SignInScreen
 import com.msicoding.lproject.data.SignInViewModel
 import com.msicoding.lproject.core.ui.theme.LProjectTheme
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 //@AndroidEntryPoint
